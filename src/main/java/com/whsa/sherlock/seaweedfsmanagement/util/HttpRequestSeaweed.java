@@ -9,10 +9,9 @@ import java.io.IOException;
 public class HttpRequestSeaweed {
     //1.创建对应的MediaType
     private static final MediaType MEDIA_TYPE_PNG = MediaType.Companion.parse("image/png");
-    private final OkHttpClient client = new OkHttpClient();
+    private static final OkHttpClient client = new OkHttpClient();
 
-    public HttpRequestSeaweed(){};
-    public void uploadImage(String userName, File file) throws  IOException {
+    public static void uploadImage(File file) throws  IOException {
 
         //2.创建RequestBody
         RequestBody fileBody = RequestBody.Companion.create(file,MEDIA_TYPE_PNG);
@@ -21,7 +20,6 @@ public class HttpRequestSeaweed {
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("file", "testImage.png", fileBody)
-                .addFormDataPart("userName", userName)
                 .build();
 
         //4.构建请求
